@@ -23,6 +23,12 @@ Wrapper::Wrapper() :
     parsing->attach(std::make_shared<ContinuinglyAnalytical>(download));
 }
 
+Wrapper::~Wrapper()
+{
+    if (nullptr != parsing) delete parsing;
+    if (nullptr != download) delete download;
+}
+
 int Wrapper::init()
 {
     epollFd = epoll_create(100);

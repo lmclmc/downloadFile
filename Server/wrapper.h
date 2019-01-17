@@ -12,6 +12,7 @@ class Wrapper
 {
 public:
     Wrapper();
+    ~Wrapper();
 
     int init();
 
@@ -28,8 +29,8 @@ private:
 
     std::shared_ptr<Protocol> protocol;
 
-    Parsing *parsing;
-    Download *download;
+    Parsing *parsing = nullptr;
+    Download *download = nullptr;
 };
 
 #endif // WRAPPER_H
