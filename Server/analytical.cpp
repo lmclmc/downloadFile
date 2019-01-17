@@ -49,7 +49,7 @@ void NormalAnalytical::analytical(Structure::Data &data)
         unsigned char qwep[7];
         memcpy(qwep, &c, 4);
         memcpy(qwep+4, &prot, sizeof(Structure::Protocol));
-        printf("%d\n", send(data.clientFd, qwep, 7, 0));
+        send(data.clientFd, qwep, 7, 0);
      //   close(data.clientFd);
     }
 }
@@ -122,7 +122,7 @@ void ContinuinglyAnalytical::analytical(Structure::Data &data)
         unsigned char qwep[7];
         memcpy(qwep, &c, 4);
         memcpy(qwep+4, &prot, sizeof(Structure::Protocol));
-        printf("%d\n", send(data.clientFd, qwep, 7, 0));
+        send(data.clientFd, qwep, 7, 0);
      //   close(data.clientFd);
     }
 }

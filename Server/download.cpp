@@ -35,12 +35,12 @@ bool Download::run(int fileFd, int clientFd, long &fileSize, long &offset, void 
 {
     int length;
     if (fileSize > MAX_SOCKET_BUF_SIZE){
-        length = send(clientFd, p+offset, MAX_SOCKET_BUF_SIZE, 0);
+        length = send(clientFd, (unsigned char *)p+offset, MAX_SOCKET_BUF_SIZE, 0);
     } else {
-        length = send(clientFd, p+offset, fileSize, 0);
+        length = send(clientFd, (unsigned char *)p+offset, fileSize, 0);
     }
     if (EPIPE == errno || EBADF == errno){
-        munmap(p, 1024*1024*1024*4);
+        munmap(p, 4294967295);
         close(clientFd);
         close(fileFd);
         return false;
@@ -51,7 +51,7 @@ bool Download::run(int fileFd, int clientFd, long &fileSize, long &offset, void 
         fileSize -= length;
     }
     if (fileSize <= 0){
-        munmap(p, 1024*1024*1024*4);
+        munmap(p, 4294967295);
         close(clientFd);
         close(fileFd);
         return false;
